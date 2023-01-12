@@ -11,7 +11,7 @@ const options = {
 let importedRecipe = 'https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi'
 
 
-getApi()
+// getApi()
 
 
 
@@ -24,8 +24,23 @@ function getApi() {
     return response.json();
   })
 	.then(function(data){
-    console.log(data)
+    const r_name = data[0].name
+    const r_image = data[0].image[1]
+    const r_ingredients = data[0].ingredients
+    const r_instructions = data[0].instructions;
+    const r_yield =  data[0].yield
 
+const recipeObject = {
+  name:r_name,
+  image:r_image,
+  ingredients:r_ingredients,
+  instructions:r_instructions,
+  yield:r_yield
+}
+
+console.log(data)
+console.log(recipeObject)
+    // console.log(data[0].name)
 
     
 
