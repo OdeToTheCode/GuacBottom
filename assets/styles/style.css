@@ -1,5 +1,115 @@
+*{
+  font-family: 'Poppins', sans-serif;
+}
+
+body{
+  background-image: url("../../assets/images/bowlofguac.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+/* Header */
 
 header {
-  background-color: #5fecff;
-  color: rgb(31, 39, 21);
+  /* background-image: linear-gradient(to bottom right, rgb(50, 133, 18), rgb(161, 252, 87)); */
+  /* background-image: linear-gradient(to bottom right, rgb(67, 114, 40), rgb(221, 250, 93)); */
+  /* background-image: linear-gradient(to bottom right, rgb(0, 103, 172), rgb(93, 226, 250)); */
+  background-image: linear-gradient(to bottom right, rgb(0, 92, 5), rgb(93, 250, 93));
+  /* background-color: rgb(216, 194, 166); */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(68, 68, 68);
+}
+
+.nameDiv{
+  padding: 0.5rem 2rem;
+}
+
+.name, .nameSubtext{
+  font-family: 'Comfortaa', cursive;
+  color:white;
+  margin: 0;
+}
+
+.name{
+  font-size: 5rem;
+}
+.nameSubtext{
+  font-size: 3rem;
+}
+
+header img{
+  width: 155px;
+  border-radius: 50%;
+  padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.subtext{
+  color: white;
+  font-size: 1.5rem;
+  padding-right: 2rem;
+}
+
+.subtextImageContainer{
+  display: flex;
+  align-items: end;
+}
+
+/* main container */
+
+.mainContainer{
+  display: flex;
+}
+
+
+/* nav bar */
+
+.navContainer{
+  width: 20%;
+}
+
+.navBar{
+  background-color: rgba(255, 228, 196, 0.637);
+  border: 1px solid rgb(105, 105, 105);
+  border-radius: 15px;
+  margin: 0 0.5rem;
+  padding: 0;
+}
+
+.navHeader{
+  background-image: linear-gradient(to bottom right, rgb(0, 92, 5), rgb(93, 250, 93));
+  color: white;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  text-align: center;
+  font-size: 2rem;
+  padding: 0.5rem;
+  margin: 0;
+}
+
+.link{
+  color:rgb(68, 68, 68);
+  text-decoration: none;
+  font-size: 22px;
+}
+.link:hover{
+  font-size: 26px;
+}
+
+/* main text */
+
+.mainTextContainer{
+  background-color: rgba(255, 228, 196, 0.637);
+  width: 80%;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  margin: 0 1rem;
+}
+
+.missionStatementContainer{
+  color: rgb(68, 68, 68);
 }
