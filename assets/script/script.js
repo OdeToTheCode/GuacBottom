@@ -1,5 +1,5 @@
 $(function(){
-
+  let recipeDataArray = JSON.parse(localStorage.getItem("recipeDataArray")) || []
 
 
   const options = {
@@ -23,20 +23,39 @@ getApi()
       })
       .then(function(data){
       const r_name = data[0].name
-      const r_image = data[0].image[1]
+      // const r_image = data[0].image[1]
       const r_ingredients = data[0].ingredients
       const r_instructions = data[0].instructions;
       const r_yield =  data[0].yield
+      
       const recipeObject = {
       name:r_name,
-      image:r_image,
+      // image:r_image,
       ingredients:r_ingredients,
       instructions:r_instructions,
       yield:r_yield
-     
+
       }
-    console.log(recipeObject)
+      // let stringed = JSON.stringify(recipeDataArray)
+      // recipeDataArray.push(recipeObject)
+      // localStorage.setItem("recipeDataArray", stringed)
+      console.log(recipeDataArray)
+    console.log(typeof recipeObject)
+
   
   })
     }
   })
+
+
+
+
+  /*Goals for 1/12/23:
+
+  - recipe and put it in array
+  - set to local stroge
+  - get from local storage
+  - take recipe array put into html dom elements
+  - get to display on page
+
+  */
