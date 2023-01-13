@@ -1,74 +1,78 @@
-// $(function(){
-// const options = {
-// 	method: 'POST',
-// 	headers: {
-// 		'content-type': 'text/plain',
-// 		'X-RapidAPI-Key': '9987ab57famsh4b33ddf26f77c6bp1af32bjsnc0a5287ef750',
-// 		'X-RapidAPI-Host': 'mycookbook-io1.p.rapidapi.com'
-// 	},
-// 	body: 'https://www.delish.com/cooking/recipe-ideas/recipes/a45382/avocado-egg-boats-recipe/'
-// };
-// let importedRecipe = 'https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi'
 
 
-// getApi()
+$(function(){
+  let recipeDataArray = JSON.parse(localStorage.getItem("recipeDataArray")) || []
+
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'content-type': 'text/plain',
+      'X-RapidAPI-Key': '9987ab57famsh4b33ddf26f77c6bp1af32bjsnc0a5287ef750',
+      'X-RapidAPI-Host': 'mycookbook-io1.p.rapidapi.com'
+    },
+    body: 'https://www.delish.com/cooking/recipe-ideas/recipes/a45382/avocado-egg-boats-recipe/'
+  };
+  let importedRecipe = 'https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi'
 
 
 
+getApi()
+  function getApi() {
+    fetch(importedRecipe, options)
+      .then(function(response){
+      return response.json();
+      })
+      .then(function(data){
+      const r_name = data[0].name
+      // const r_image = data[0].image[1]
+      const r_ingredients = data[0].ingredients
+      const r_instructions = data[0].instructions[0].steps; //made a change here
+      const r_yield =  data[0].yield
+      
+      const recipeObject = {
+      name:r_name,
+      // image:r_image,
+      ingredients:r_ingredients,
+      instructions:r_instructions,
+      yield:r_yield
 
+      }
+      recipeDataArray.push(recipeObject)
+      let stringed = JSON.stringify(recipeDataArray)
+      localStorage.setItem("recipeDataArray", stringed)
 
-// function getApi() {
+    })
+    }
+    renderRecipe()
+  function renderRecipe (){
+  recipeDataArray.forEach(recipe =>{
+    console.log(recipe)
+    let recipeName = $('<h5>').text(recipe.name)
+    $('body').append(recipeName)
 
-
-   fetch(importedRecipe, options)
- 	.then(function(response){
-     return response.json();
-   })
- 	.then(function(data){
-     console.log(data)
-
-  fetch(importedRecipe, options)
-	.then(function(response){
-    return response.json();
+  recipe.ingredients.forEach(recipeItem =>{
+      console.log(recipeItem)
+      let ingredientLi = $('<li>').text(recipeItem)
+      $('body').append(ingredientLi)
+    })
+    recipe.instructions.forEach(step=>{
+      let instructionStep = $("<li>").text(step)
+      $('body').append(instructionStep)
+    })
+  })}
+  
+  
+  
   })
-	.then(function(data){
-    const r_name = data[0].name
-    const r_image = data[0].image[1]
-    const r_ingredients = data[0].ingredients
-    const r_instructions = data[0].instructions;
-    const r_yield =  data[0].yield
-
-const recipeObject = {
-  name:r_name,
-  image:r_image,
-  ingredients:r_ingredients,
-  instructions:r_instructions,
-  yield:r_yield
-}
-
-
-console.log(data)
-console.log(recipeObject)
-    // console.log(data[0].name)
-
-    
-
-
-//   })
-	
-  
-  
-  
-  
-//   .catch(err => console.error(err));
-
-}
 
 
 
 
-
-
-
-})
-
+  /*Goals for 1/12/23:
+  - recipe and put it in array
+  - set to local stroge
+  - get from local storage
+  - take recipe array put into html dom elements
+  - get to display on page
+  */
