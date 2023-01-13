@@ -1,6 +1,6 @@
 $(function(){
 
-
+let recipeDataArray = JSON.parse(localStorage.getItem('recipeDataArray')) || []
 
   const options = {
     method: 'POST',
@@ -18,24 +18,23 @@ $(function(){
 getApi()
   function getApi() {
     fetch(importedRecipe, options)
-      .then(function(response){
-      return response.json();
-      })
+      .then(function(response){return response.json(); })
       .then(function(data){
       const r_name = data[0].name
-      const r_image = data[0].image[1]
+      // const r_image = data[0].image[1]
       const r_ingredients = data[0].ingredients
       const r_instructions = data[0].instructions;
       const r_yield =  data[0].yield
       const recipeObject = {
       name:r_name,
-      image:r_image,
+      // image:r_image,
       ingredients:r_ingredients,
       instructions:r_instructions,
       yield:r_yield
-     
       }
-    console.log(recipeObject)
+      recipeDataArray.push(recipeObject)
+      localStorage.setItem(JSON.stringify('recipeDataArray', recipeDataArray))
+    console.log(recipeDataArray)
   
   })
     }
