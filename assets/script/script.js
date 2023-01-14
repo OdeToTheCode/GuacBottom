@@ -2,7 +2,14 @@
 
 $(function(){
   let recipeDataArray = JSON.parse(localStorage.getItem("recipeDataArray")) || []
+  let importedRecipe = 'https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi'
+let card = $('<div>').addClass('card')
 
+let img = $('<img>').attr('src', '').addClass('card-img-top')
+let cardTitle = $('<h5>').addClass('card-title').text('recipe name here')
+let cardBody = $('<div>').addClass('card-body')
+let mainList = $('<ul>').addClass('mainUl')
+let mainListItems = $('<li>').addClass('mainListItems')//this is where each array item will be
 
   const options = {
     method: 'POST',
@@ -13,68 +20,144 @@ $(function(){
     },
     body: ''
   };
-  let importedRecipe = 'https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi'
 
 
- $('#thisfuckingthing').on('click', function(){
-// console.log($('#url-import').val())
-options.body = $('#url-import').val()
-console.log(options.body)
-getApi()
 
- })
 
 // getApi()
   function getApi() {
     fetch(importedRecipe, options)
-
-      .then(function(response){
-      return response.json();
-      })
+      .then(response =>{return response.json();})
       .then(function(data){
-      const r_name = data[0].name
-      // const r_image = data[0].image[1]
-      const r_ingredients = data[0].ingredients
-      const r_instructions = data[0].instructions[0].steps; //made a change here
-      const r_yield =  data[0].yield
-      console.log(data)
-      const recipeObject = {
-      name:r_name,
-      // image:r_image,
-      ingredients:r_ingredients,
-      instructions:r_instructions,
-      yield:r_yield
-
-      }
-      recipeDataArray.push(recipeObject)
-      let stringed = JSON.stringify(recipeDataArray)
-      localStorage.setItem("recipeDataArray", stringed)
-
-    })
-    }
+        console.log(data)
+        const recipeObject = {
+          name:data[0].name,
+          // image:data[0].image,
+          ingredients:data[0].ingredients,
+          instructions:data[0].instructions[0].steps,
+          yield:data[0].yield
+        }
+        console.log(recipeObject)
+        recipeDataArray.push(recipeObject)
+        let stringed = JSON.stringify(recipeDataArray)
+        localStorage.setItem("recipeDataArray", stringed)
+      })
+  }
     renderRecipe()
   function renderRecipe (){
-  recipeDataArray.forEach(recipe =>{
-    // console.log(recipe)
-    let recipeName = $('<h5>').text(recipe.name)
-    $('body').append(recipeName)
-
-  recipe.ingredients.forEach(recipeItem =>{
-      // console.log(recipeItem)
-      let ingredientLi = $('<li>').text(recipeItem)
-      $('body').append(ingredientLi)
-    })
-    recipe.instructions.forEach(step=>{
-      let instructionStep = $("<li>").text(step)
-      $('body').append(instructionStep)
-    })
+    recipeDataArray.forEach(recipe =>{
+      const card = $('<div>').addClass('card')
+      $(card)
+        .append($('<h5>')
+          .text(recipe.name))
+      recipe.ingredients.forEach(recipeItem =>{
+        $(card)
+          .append($('<li>')
+            .text(recipeItem))
+      })
+      recipe.instructions.forEach(step=>{
+        $(card)
+          .append($("<li>")
+            .text(step))
+      })
+      $('.card-container')
+        .append(card)
+            
   })}
   
   
 
 
+  $('#url-import-button').on('click', function(){
+    options.body = $('#url-import').val()
+    console.log(options.body)
+    getApi()
+    
+     })
+  
+
+     
+
+
+
+
+// $(mainListItems).text("this fuckin thing")
+// let recipeCard =  
+//                   $(card)
+//                     .append(img)
+//                     .append(cardTitle)
+//                     .append((cardBody)
+//                       .append((mainList)
+//                         .append(mainListItems)))
+// $('body').append(recipeCard)
+
+
+
+
+
+
+
+// console.log(card)
+// console.log(img)
+// console.log(cardBody)
+// console.log(cardTitle)
+// console.log(accordion)
+// console.log(accordionItem)
+// console.log(accordionHeader)
+// console.log(accordionBtn)
+// console.log(accordionBody)
+
 
   
+// $('main')
+//   .append(card
+//     .append($('<img>')
+//       .attr('src', '')
+//       .addClass('card-img-top')
+//     )
+//     .append(
+//       (
+//         $('<div>')
+//       .addClass('card-body'))
+//         .append($('<h5>')
+//           .addClass('card-title')
+//           .text('recipe name here')
+//           )
+//         .append(($('<div>')
+//           .addClass('accordion')
+//           .attr('id', 'accordion-body')
+//             .append($('<div>')
+//             .addClass('accordion-item')
+//               .append($('<h2>')
+//                 .addClass('accordion-header', 'headingOne')
+//                 .attr('id', 'panelsStayOpen-headingOne')
+//                   .append(  $('<button>')
+//                     .addClass('accordion-button', 'collapsed')
+//                     .attr({
+//                       'type': 'button',
+//                       'data-bs-toggle': 'collapse',
+//                       'data-bs-target': '#panelsStayOpen-collapseOne',
+//                       'aria-expanded': 'false',
+//                       'aria-controls':'panelsStayOpen-collapseOne',})
+//                   )
+//               .append
+//                 (($('<div>')
+//                   .addClass('accordion-collapse', 'collapse')
+//                   .attr({
+//                     'aria-labelledby': 'panelsStayOpen-headingOne',
+//                     'id': 'panelsStayOpen-collapse'})
+                
+//                     )).append($('<div>').addClass('accordion-body')))
+//             )
+//         ))
+//       )
+//   )
+      
+
+
+
+
+
   })
 
 
