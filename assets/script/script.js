@@ -11,15 +11,23 @@ $(function(){
       'X-RapidAPI-Key': '9987ab57famsh4b33ddf26f77c6bp1af32bjsnc0a5287ef750',
       'X-RapidAPI-Host': 'mycookbook-io1.p.rapidapi.com'
     },
-    body: 'https://www.delish.com/cooking/recipe-ideas/recipes/a45382/avocado-egg-boats-recipe/'
+    body: ''
   };
   let importedRecipe = 'https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi'
 
 
-
+ $('#thisfuckingthing').on('click', function(){
+// console.log($('#url-import').val())
+options.body = $('#url-import').val()
+console.log(options.body)
 getApi()
+
+ })
+
+// getApi()
   function getApi() {
     fetch(importedRecipe, options)
+
       .then(function(response){
       return response.json();
       })
@@ -29,7 +37,7 @@ getApi()
       const r_ingredients = data[0].ingredients
       const r_instructions = data[0].instructions[0].steps; //made a change here
       const r_yield =  data[0].yield
-      
+      console.log(data)
       const recipeObject = {
       name:r_name,
       // image:r_image,
@@ -47,12 +55,12 @@ getApi()
     renderRecipe()
   function renderRecipe (){
   recipeDataArray.forEach(recipe =>{
-    console.log(recipe)
+    // console.log(recipe)
     let recipeName = $('<h5>').text(recipe.name)
     $('body').append(recipeName)
 
   recipe.ingredients.forEach(recipeItem =>{
-      console.log(recipeItem)
+      // console.log(recipeItem)
       let ingredientLi = $('<li>').text(recipeItem)
       $('body').append(ingredientLi)
     })
@@ -63,6 +71,9 @@ getApi()
   })}
   
   
+
+
+
   
   })
 
