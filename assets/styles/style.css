@@ -113,3 +113,28 @@ header img{
 .missionStatementContainer{
   color: rgb(68, 68, 68);
 }
+
+
+
+/* accordion test style*/
+	
+
+.panel-heading a:after {
+  font-family:'Glyphicons Halflings';
+  content:"\2212";
+  float: right;
+  color: grey;
+}
+.panel-heading a.collapsed:after {
+  content:"\2b";
+}
+
+.panel-heading a:after {
+font-family:'Glyphicons Halflings';
+content:"\2212";
+float: right;
+color: grey;
+}
+.panel-heading a.collapsed:after {
+content:"\2b";
+}

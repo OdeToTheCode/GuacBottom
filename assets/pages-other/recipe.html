@@ -33,10 +33,62 @@
       </div>
     </div>  
 
-    <div class="card-container"></div>
-    <input type="url" id="url-import" placeholder="url">
-    <button id="url-import-button">URL Import</button>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary recipe" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Open Recipe
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Recipe Name</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">           
+            <div class="accordion" id="accordion-body">
+              <div class="accordion-item">
+                <h2 class="accordion-header headingOne" id="panelsStayOpen-headingOne">
+                  <button class="accordion-button collapsed ingredients" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                  Ingredients
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                  <ul class="accordion-body-ingredients"></ul>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                  <button class="accordion-button collapsed directions" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                  Directions
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                  <ol class="accordion-body-directions">
+                  </ol>
+                </div>
+              </div>
+          
+        </div>
+    
+    
+          
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="card-container row"></div>
+    <input type="url" id="url-import" placeholder="Recipe URL">
+    <button id="url-import-button">URL Import</button>
+<!-- =======================card with accordion============================ -->
     <!-- <div class="card" style="width: 18rem;">
       <img src="..." class="card-img-top" alt="...">
       <div class="card-body">
@@ -71,12 +123,12 @@
       <div class="card-body">
         <button class="btn nutrients">Get Nutrients</button>
       </div>
-    </div> -->
+    </div>
 
 
       
     </div>
-  </div>
+  </div> -->
 </main>
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -3,13 +3,6 @@
 $(function(){
   let recipeDataArray = JSON.parse(localStorage.getItem("recipeDataArray")) || []
   let importedRecipe = 'https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi'
-let card = $('<div>').addClass('card')
-
-let img = $('<img>').attr('src', '').addClass('card-img-top')
-let cardTitle = $('<h5>').addClass('card-title').text('recipe name here')
-let cardBody = $('<div>').addClass('card-body')
-let mainList = $('<ul>').addClass('mainUl')
-let mainListItems = $('<li>').addClass('mainListItems')//this is where each array item will be
 
   const options = {
     method: 'POST',
@@ -41,9 +34,10 @@ let mainListItems = $('<li>').addClass('mainListItems')//this is where each arra
         recipeDataArray.push(recipeObject)
         let stringed = JSON.stringify(recipeDataArray)
         localStorage.setItem("recipeDataArray", stringed)
+      
       })
   }
-    renderRecipe()
+
   function renderRecipe (){
     recipeDataArray.forEach(recipe =>{
       const card = $('<div>').addClass('card')
@@ -64,8 +58,37 @@ let mainListItems = $('<li>').addClass('mainListItems')//this is where each arra
         .append(card)
             
   })}
+  $(".recipe").on('click', function(){
+    renderContent(recipeDataArray[0])
+  })
+  function renderContent (recipe){
+    console.log(recipeDataArray)
+    $('.modal-title').text(recipe.name)
+      recipe.ingredients.forEach(recipeItem =>{
+        $('.accordion-body-ingredients')
+          .append($('<li>')
+            .text(recipeItem))
+      })
+      recipe.instructions.forEach(step=>{
+        $('.accordion-body-directions')
+          .append($("<li>")
+            .text(step))
+      })
+            
+  }
   
   
+
+
+
+
+
+
+
+
+
+
+
 
 
   $('#url-import-button').on('click', function(){
@@ -75,13 +98,37 @@ let mainListItems = $('<li>').addClass('mainListItems')//this is where each arra
     
      })
   
+// let recipeCard = $('<div class="card" style="width: 18rem;">')
+//      let cardBody = $('<div class="card-body">')
+//         let cardTitle = $('<h5 class="card-title" id="recipeName">Recipe Name</h5>')
 
      
+// // ===============================================================accordion===============================
+//     let accordion = $('<div class="accordion" id="accordion-body">')
+//       let ingredients = $('<div class="accordion-item">')
+        
+//         let accordionHeader = $('<h2 class="accordion-header headingOne" id="panelsStayOpen-headingOne">')
+//           let accordionBtn1 = $('<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">')
+//               //could we use $(this) for id and targeting to prevent multi targeting
+//         let panelsStayOpen = $('<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">')
+//           let panelBody = $('<div class="accordion-body">')
+//       let directions = $('<div class="accordion-item">')
+// panelsStayOpen.append($(panelBody.text('suck it trebeck')))
+// console.log(panelsStayOpen)
+// accordionHeader.append($(accordionBtn1).text('Ingredients'))
+// ingredients.append(accordionHeader)
+// ingredients.append(panelsStayOpen)
+// accordion.append(ingredients)
+// accordionHeader.append($(accordionBtn).text('Directions'))
+// directions.append(accordionHeader)
+// directions.append(panelsStayOpen)
+// accordion.append(directions)
+// // console.log($(accordionItem).children())
+// $(cardBody).append(cardTitle).append(accordion)
+// recipeCard.append(cardBody)
+// $('.card-container').append(recipeCard)
 
 
-
-
-// $(mainListItems).text("this fuckin thing")
 // let recipeCard =  
 //                   $(card)
 //                     .append(img)
@@ -89,7 +136,7 @@ let mainListItems = $('<li>').addClass('mainListItems')//this is where each arra
 //                     .append((cardBody)
 //                       .append((mainList)
 //                         .append(mainListItems)))
-// $('body').append(recipeCard)
+
 
 
 
@@ -118,11 +165,11 @@ let mainListItems = $('<li>').addClass('mainListItems')//this is where each arra
 //     .append(
 //       (
 //         $('<div>')
-//       .addClass('card-body'))
-//         .append($('<h5>')
-//           .addClass('card-title')
-//           .text('recipe name here')
-//           )
+    //       .addClass('card-body'))
+    //         .append($('<h5>')
+    //           .addClass('card-title')
+    //           .text('recipe name here')
+    //           )
 //         .append(($('<div>')
 //           .addClass('accordion')
 //           .attr('id', 'accordion-body')
@@ -144,7 +191,7 @@ let mainListItems = $('<li>').addClass('mainListItems')//this is where each arra
 //                 (($('<div>')
 //                   .addClass('accordion-collapse', 'collapse')
 //                   .attr({
-//                     'aria-labelledby': 'panelsStayOpen-headingOne',
+//                     'aria-labelled': 'panelsStayOpen-headingOne',
 //                     'id': 'panelsStayOpen-collapse'})
                 
 //                     )).append($('<div>').addClass('accordion-body')))
