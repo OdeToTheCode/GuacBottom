@@ -38,36 +38,44 @@ $(function(){
       })
   }
 
-  function renderRecipe (){
-    recipeDataArray.forEach(recipe =>{
-      const card = $('<div>').addClass('card')
-      $(card)
-        .append($('<h5>')
-          .text(recipe.name))
-      recipe.ingredients.forEach(recipeItem =>{
-        $(card)
-          .append($('<li>')
-            .text(recipeItem))
-      })
-      recipe.instructions.forEach(step=>{
-        $(card)
-          .append($("<li>")
-            .text(step))
-      })
-      $('.card-container')
-        .append(card)
+  // function renderRecipe (){
+  //   recipeDataArray.forEach(recipe =>{
+  //     const card = $('<div>').addClass('card')
+  //     $(card)
+  //       .append($('<h5>')
+  //         .text(recipe.name))
+  //     recipe.ingredients.forEach(recipeItem =>{
+  //       $(card)
+  //         .append($('<li>')
+  //           .text(recipeItem))
+  //     })
+  //     recipe.instructions.forEach(step=>{
+  //       $(card)
+  //         .append($("<li>")
+  //           .text(step))
+  //     })
+  //     $('.card-container')
+  //       .append(card)
             
-  })}
+  // })}
+
+
   $(".recipe").on('click', function(){
     renderContent(recipeDataArray[0])
   })
   function renderContent (recipe){
+    $('.modal-title').text('')
+    $('.accordion-body-ingredients').empty()
+    $('.accordion-body-directions').empty()
     console.log(recipeDataArray)
     $('.modal-title').text(recipe.name)
+
       recipe.ingredients.forEach(recipeItem =>{
         $('.accordion-body-ingredients')
           .append($('<li>')
             .text(recipeItem))
+            getNutrients(recipeItem)
+
       })
       recipe.instructions.forEach(step=>{
         $('.accordion-body-directions')
@@ -79,12 +87,33 @@ $(function(){
   
   
 
+//if we give each button a increasing data-set equal to the index position of that item in the array we can use 
+//recipeArrayData[$('this').dataset]
 
 
+// ================================get nutrients=======================================
+
+const nu_options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '9987ab57famsh4b33ddf26f77c6bp1af32bjsnc0a5287ef750',
+		'X-RapidAPI-Host': 'edamam-food-and-grocery-database.p.rapidapi.com'
+	}
+};
 
 
-
-
+function getNutrients(ingredient){
+  let keyword = ingredient
+  let nutrientsFetch = `https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=${keyword}`
+  fetch(nutrientsFetch, nu_options)
+	.then(response => response.json())
+	.then(response => {
+    console.log(response)
+    let nu = response.parsed[0].food.nutrients
+    $('.accordion-body-nutrients').append($('<li>').text(nu))
+    console.log(nu)
+  })
+	.catch(err => console.error(err));}
 
 
 
@@ -217,3 +246,6 @@ $(function(){
   - take recipe array put into html dom elements
   - get to display on page
   */
+/* Goals revisited:
+- decide if the nutrients should be fetched when the recipe is imported
+*/
