@@ -4,7 +4,7 @@ $(function(){
   let recipeDataArray = JSON.parse(localStorage.getItem("recipeDataArray")) || []
   let importedRecipe = 'https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi'
 
-  const options = {
+  const options = { //recipe import
     method: 'POST',
     headers: {
       'content-type': 'text/plain',
@@ -23,20 +23,32 @@ $(function(){
       .then(response =>{return response.json();})
       .then(function(data){
         console.log(data)
+
         const recipeObject = {
           name:data[0].name,
-          // image:data[0].image,
+          // image:data[0].image[0],
           ingredients:data[0].ingredients,
           instructions:data[0].instructions[0].steps,
           yield:data[0].yield
         }
-        console.log(recipeObject)
+
+        // console.log(recipeObject)
         recipeDataArray.push(recipeObject)
         let stringed = JSON.stringify(recipeDataArray)
         localStorage.setItem("recipeDataArray", stringed)
-      
+        recipeButtonFun(recipeObject)
       })
   }
+
+  function recipeButtonFun(data){
+    console.log(data.name)
+    let newButton = $('<button>').text(data.name).addClass('btn', 'btn-primary', 'recipe')
+    console.log(newButton[0].textContent)
+    let key = newButton[0].textContent
+    console.log(key)
+    $('#buttonContainer').append(newButton)
+  }
+
 
   // function renderRecipe (){
   //   recipeDataArray.forEach(recipe =>{
@@ -61,13 +73,16 @@ $(function(){
 
 
   $(".recipe").on('click', function(){
+
     renderContent(recipeDataArray[0])
   })
+
+
   function renderContent (recipe){
     $('.modal-title').text('')
     $('.accordion-body-ingredients').empty()
     $('.accordion-body-directions').empty()
-    console.log(recipeDataArray)
+    // console.log(recipeDataArray)
     $('.modal-title').text(recipe.name)
 
       recipe.ingredients.forEach(recipeItem =>{
@@ -108,10 +123,10 @@ function getNutrients(ingredient){
   fetch(nutrientsFetch, nu_options)
 	.then(response => response.json())
 	.then(response => {
-    console.log(response)
+    // console.log(response)
     let nu = response.parsed[0].food.nutrients
     $('.accordion-body-nutrients').append($('<li>').text(nu))
-    console.log(nu)
+    // console.log(nu)
   })
 	.catch(err => console.error(err));}
 
@@ -122,7 +137,7 @@ function getNutrients(ingredient){
 
   $('#url-import-button').on('click', function(){
     options.body = $('#url-import').val()
-    console.log(options.body)
+    // console.log(options.body)
     getApi()
     
      })

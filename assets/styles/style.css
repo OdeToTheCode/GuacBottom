@@ -113,6 +113,10 @@ header img{
 .missionStatementContainer{
   color: rgb(68, 68, 68);
 }
+.contentContainer{
+  outline: 5px solid black;
+  
+}
 
 
 
