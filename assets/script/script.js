@@ -3,6 +3,8 @@
 $(function(){
   let recipeDataArray = JSON.parse(localStorage.getItem("recipeDataArray")) || []
   let importedRecipe = 'https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi'
+  let recipeUrl = '';
+  let recipeKey = '';
 
   const options = { //recipe import
     method: 'POST',
@@ -14,7 +16,7 @@ $(function(){
     body: ''
   };
 
-
+// recipeButtonFun()
 
 
 // getApi()
@@ -22,8 +24,8 @@ $(function(){
     fetch(importedRecipe, options)
       .then(response =>{return response.json();})
       .then(function(data){
-        console.log(data)
-
+     
+        console.log(recipeUrl)
         const recipeObject = {
           name:data[0].name,
           // image:data[0].image[0],
@@ -31,7 +33,6 @@ $(function(){
           instructions:data[0].instructions[0].steps,
           yield:data[0].yield
         }
-
         // console.log(recipeObject)
         recipeDataArray.push(recipeObject)
         let stringed = JSON.stringify(recipeDataArray)
@@ -40,45 +41,37 @@ $(function(){
       })
   }
 
-  function recipeButtonFun(data){
-    console.log(data.name)
-    let newButton = $('<button>').text(data.name).addClass('btn', 'btn-primary', 'recipe')
+  // function recipeButtonFun(data){
+  //   // console.log(data.name)
+  //   let newButton = $('<button>').text(data.name).addClass('btn', 'btn-primary', 'recipe')
+  //   console.log(newButton[0].textContent)
+  //   let key = newButton[0].textContent
+  //   console.log(key)
+  //   $('#buttonContainer').append(newButton)
+  // }
+  function recipeButtonFun(){
+   for (let index = 0; index < recipeDataArray.length; index++) {
+    // console.log(index)
+    let Key = recipeDataArray[index].name
+    recipeKey = recipeDataArray[index]
+    // console.log(key)
+    let newButton = $('<button>').text(Key).addClass('btn', 'btn-primary', 'recipe').attr('id', recipe[index])
     console.log(newButton[0].textContent)
-    let key = newButton[0].textContent
-    console.log(key)
     $('#buttonContainer').append(newButton)
+   } 
   }
 
 
-  // function renderRecipe (){
-  //   recipeDataArray.forEach(recipe =>{
-  //     const card = $('<div>').addClass('card')
-  //     $(card)
-  //       .append($('<h5>')
-  //         .text(recipe.name))
-  //     recipe.ingredients.forEach(recipeItem =>{
-  //       $(card)
-  //         .append($('<li>')
-  //           .text(recipeItem))
-  //     })
-  //     recipe.instructions.forEach(step=>{
-  //       $(card)
-  //         .append($("<li>")
-  //           .text(step))
-  //     })
-  //     $('.card-container')
-  //       .append(card)
-            
-  // })}
 
-
-  $(".recipe").on('click', function(){
+  $("#buttonContainer").on('click', function(e){
+    console.log()
 
     renderContent(recipeDataArray[0])
   })
 
 
   function renderContent (recipe){
+    console.log(recipe)
     $('.modal-title').text('')
     $('.accordion-body-ingredients').empty()
     $('.accordion-body-directions').empty()
@@ -131,122 +124,14 @@ function getNutrients(ingredient){
 	.catch(err => console.error(err));}
 
 
-
-
-
-
   $('#url-import-button').on('click', function(){
     options.body = $('#url-import').val()
+    recipeUrl = $('#url-import').val()
     // console.log(options.body)
     getApi()
     
      })
   
-// let recipeCard = $('<div class="card" style="width: 18rem;">')
-//      let cardBody = $('<div class="card-body">')
-//         let cardTitle = $('<h5 class="card-title" id="recipeName">Recipe Name</h5>')
-
-     
-// // ===============================================================accordion===============================
-//     let accordion = $('<div class="accordion" id="accordion-body">')
-//       let ingredients = $('<div class="accordion-item">')
-        
-//         let accordionHeader = $('<h2 class="accordion-header headingOne" id="panelsStayOpen-headingOne">')
-//           let accordionBtn1 = $('<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">')
-//               //could we use $(this) for id and targeting to prevent multi targeting
-//         let panelsStayOpen = $('<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">')
-//           let panelBody = $('<div class="accordion-body">')
-//       let directions = $('<div class="accordion-item">')
-// panelsStayOpen.append($(panelBody.text('suck it trebeck')))
-// console.log(panelsStayOpen)
-// accordionHeader.append($(accordionBtn1).text('Ingredients'))
-// ingredients.append(accordionHeader)
-// ingredients.append(panelsStayOpen)
-// accordion.append(ingredients)
-// accordionHeader.append($(accordionBtn).text('Directions'))
-// directions.append(accordionHeader)
-// directions.append(panelsStayOpen)
-// accordion.append(directions)
-// // console.log($(accordionItem).children())
-// $(cardBody).append(cardTitle).append(accordion)
-// recipeCard.append(cardBody)
-// $('.card-container').append(recipeCard)
-
-
-// let recipeCard =  
-//                   $(card)
-//                     .append(img)
-//                     .append(cardTitle)
-//                     .append((cardBody)
-//                       .append((mainList)
-//                         .append(mainListItems)))
-
-
-
-
-
-
-
-
-// console.log(card)
-// console.log(img)
-// console.log(cardBody)
-// console.log(cardTitle)
-// console.log(accordion)
-// console.log(accordionItem)
-// console.log(accordionHeader)
-// console.log(accordionBtn)
-// console.log(accordionBody)
-
-
-  
-// $('main')
-//   .append(card
-//     .append($('<img>')
-//       .attr('src', '')
-//       .addClass('card-img-top')
-//     )
-//     .append(
-//       (
-//         $('<div>')
-    //       .addClass('card-body'))
-    //         .append($('<h5>')
-    //           .addClass('card-title')
-    //           .text('recipe name here')
-    //           )
-//         .append(($('<div>')
-//           .addClass('accordion')
-//           .attr('id', 'accordion-body')
-//             .append($('<div>')
-//             .addClass('accordion-item')
-//               .append($('<h2>')
-//                 .addClass('accordion-header', 'headingOne')
-//                 .attr('id', 'panelsStayOpen-headingOne')
-//                   .append(  $('<button>')
-//                     .addClass('accordion-button', 'collapsed')
-//                     .attr({
-//                       'type': 'button',
-//                       'data-bs-toggle': 'collapse',
-//                       'data-bs-target': '#panelsStayOpen-collapseOne',
-//                       'aria-expanded': 'false',
-//                       'aria-controls':'panelsStayOpen-collapseOne',})
-//                   )
-//               .append
-//                 (($('<div>')
-//                   .addClass('accordion-collapse', 'collapse')
-//                   .attr({
-//                     'aria-labelled': 'panelsStayOpen-headingOne',
-//                     'id': 'panelsStayOpen-collapse'})
-                
-//                     )).append($('<div>').addClass('accordion-body')))
-//             )
-//         ))
-//       )
-//   )
-      
-
-
-
 
 
   })
