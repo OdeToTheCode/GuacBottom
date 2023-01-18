@@ -1,3 +1,11 @@
+:root{
+  --white: aliceblue;
+  --black: color: rgb(68, 68, 68);
+  --gradient: linear-gradient(to bottom right, rgb(0, 92, 5), rgb(93, 250, 93));
+  --bisque: rgba(255, 228, 196, 0.637);
+  --modalbg: rgb(113, 224, 113);
+}
+
 *{
   font-family: 'Poppins', sans-serif;
 }
@@ -12,16 +20,12 @@ body{
 /* Header */
 
 header {
-  /* background-image: linear-gradient(to bottom right, rgb(50, 133, 18), rgb(161, 252, 87)); */
-  /* background-image: linear-gradient(to bottom right, rgb(67, 114, 40), rgb(221, 250, 93)); */
-  /* background-image: linear-gradient(to bottom right, rgb(0, 103, 172), rgb(93, 226, 250)); */
-  background-image: linear-gradient(to bottom right, rgb(0, 92, 5), rgb(93, 250, 93));
-  /* background-color: rgb(216, 194, 166); */
-  color: white;
+  background-image: var(--gradient);
+  color: var(--white);
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.5rem;
-  border-bottom: 1px solid rgb(68, 68, 68);
+  border-bottom: 1px solid var(--black);
 }
 
 .nameDiv{
@@ -30,7 +34,7 @@ header {
 
 .name, .nameSubtext{
   font-family: 'Comfortaa', cursive;
-  color:white;
+  color: var(--white);
   margin: 0;
 }
 
@@ -49,7 +53,7 @@ header img{
 }
 
 .subtext{
-  color: white;
+  color: var(--white);
   font-size: 1.5rem;
   padding-right: 2rem;
 }
@@ -73,16 +77,16 @@ header img{
 }
 
 .navBar{
-  background-color: rgba(255, 228, 196, 0.637);
-  border: 1px solid rgb(105, 105, 105);
+  background-color: var(--bisque);
+  border: 1px solid var(--black);
   border-radius: 15px;
   margin: 0 0.5rem;
   padding: 0;
 }
 
 .navHeader{
-  background-image: linear-gradient(to bottom right, rgb(0, 92, 5), rgb(93, 250, 93));
-  color: white;
+  background-image: var(--gradient);
+  color: var(--white);
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   text-align: center;
@@ -92,7 +96,7 @@ header img{
 }
 
 .link{
-  color:rgb(68, 68, 68);
+  color:var(--black);
   text-decoration: none;
   font-size: 22px;
 }
@@ -103,7 +107,7 @@ header img{
 /* main text */
 
 .mainTextContainer{
-  background-color: rgba(255, 228, 196, 0.637);
+  background-color: var(--bisque);
   width: 80%;
   padding: 0.5rem 1rem;
   border-radius: 15px;
@@ -111,12 +115,86 @@ header img{
 }
 
 .missionStatementContainer{
-  color: rgb(68, 68, 68);
+  color:var(--black);
 }
-.contentContainer{
-  outline: 5px solid black;
+
+/* .contentContainer{
   
+} */
+
+
+/* Recipe Page */
+
+#url-import{
+  font-size: 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--black);
+}
+
+#url-import-button{
+  background-image: var(--gradient);
+  color: var(--white);
+  font-size: 1.25rem;
+  border: 1px solid var(--black);
+  border-radius: 8px;
+}
+
+#buttonContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.btn{
+  background-color: var(--bisque);
+  color: var(--black);
+  border: 1px solid var(--black);
+  border-radius: 8px;
+  margin: 0.25rem 0;
+  font-size: 1.25rem;
+  box-shadow: 0;
+}
+.btn:hover{
+  background-image: var(--gradient) !important;
+  background-color: var(--gradient);
+  color: var(--white);
+  border: 0;
 }
 
 
+/* Modal */
 
+.modal-body{
+  background-color: var(--bisque);
+}
+
+.modal-header{
+  background-image: var(--gradient);
+  color: var(--white);
+}
+
+.accordion-button{
+  background-color: var(--modalbg);
+  color:var(--black);
+}
+.accordion-button:active{
+  background-color: var(--modalbg);
+  color:var(--black);
+}
+.accordion-button:focus{
+  background-color: var(--modalbg);
+  box-shadow: none;
+  color: var(--black);
+  border: 0;
+}
+
+.btn-secondary{
+  margin-left: 0.5rem;
+}
+
+
+/* Resources Page */
+
+.image{
+  width: 50%;
+  height: auto;
+}

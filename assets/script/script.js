@@ -16,7 +16,7 @@ $(function(){
     body: ''
   };
 
-// recipeButtonFun()
+recipeButtonFun()
 
 
 // getApi()
@@ -41,25 +41,6 @@ $(function(){
       })
   }
 
-  // function recipeButtonFun(data){
-  //   // console.log(data.name)
-  //   let newButton = $('<button>').text(data.name).addClass('btn', 'btn-primary', 'recipe')
-  //   console.log(newButton[0].textContent)
-  //   let key = newButton[0].textContent
-  //   console.log(key)
-  //   $('#buttonContainer').append(newButton)
-  // }
-  // function recipeButtonFun(){
-  //  for (let index = 0; index < recipeDataArray.length; index++) {
-  //   // console.log(index)
-  //   let Key = recipeDataArray[index].name
-  //   recipeKey = recipeDataArray[index]
-  //   // console.log(key)
-  //   let newButton = $('<button>').text(Key).addClass('btn', 'btn-primary', 'recipe').attr('id', recipe[index])
-  //   console.log(newButton[0].textContent)
-  //   $('#buttonContainer').append(newButton)
-  //  } 
-  // }
 
   function recipeButtonFun(){
     for (let index = 0; index < recipeDataArray.length; index++) {
@@ -79,11 +60,7 @@ $(function(){
     renderContent(recipeDataArray[btnIndex])
    })
 
-  // $("#buttonContainer").on('click', function(e){
-  //   console.log()
 
-  //   renderContent(recipeDataArray[0])
-  // })
 
 
   function renderContent (recipe){
@@ -98,6 +75,7 @@ $(function(){
         $('.accordion-body-ingredients')
           .append($('<li>')
             .text(recipeItem))
+            console.log(recipeItem)
             getNutrients(recipeItem)
 
       })
@@ -132,10 +110,24 @@ function getNutrients(ingredient){
   fetch(nutrientsFetch, nu_options)
 	.then(response => response.json())
 	.then(response => {
-    // console.log(response)
+    // console.log(response.parsed[0].food.nutrients)
     let nu = response.parsed[0].food.nutrients
-    $('.accordion-body-nutrients').append($('<li>').text(nu))
-    // console.log(nu)
+    console.log(response.text)
+    let ingredientName = response.text
+    let cholesterol = nu.CHOCDF
+    let calories = nu.ENERC_KCAL
+    let fat = nu.FAT
+    let fiber = nu.FIBTG
+    let protein = nu.PROCNT
+    $('.accordion-body-nutrients').append($('<ul>').addClass('ingredientName').text(ingredientName))
+    $('.ingredientName').append($('<li>').text(`Cholesterol: ${nu.CHOCDF}`))
+    // $('.accordion-body-nutrients').append($('<li>').text(cholesterol))
+    // $('.accordion-body-nutrients').append($('<li>').text(cholesterol))
+    // $('.accordion-body-nutrients').append($('<li>').text(calories))
+    // $('.accordion-body-nutrients').append($('<li>').text(fat))
+    // $('.accordion-body-nutrients').append($('<li>').text(fiber))
+    // $('.accordion-body-nutrients').append($('<li>').text(protein))
+    // // console.log(nu)
   })
 	.catch(err => console.error(err));}
 
