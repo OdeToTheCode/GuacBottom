@@ -119,13 +119,15 @@ function getNutrients(ingredient){
     let fat = nu.FAT
     let fiber = nu.FIBTG
     let protein = nu.PROCNT
-    $('.accordion-body-nutrients').append($('<li>').text(cholesterol))
-    $('.accordion-body-nutrients').append($('<li>').text(cholesterol))
-    $('.accordion-body-nutrients').append($('<li>').text(calories))
-    $('.accordion-body-nutrients').append($('<li>').text(fat))
-    $('.accordion-body-nutrients').append($('<li>').text(fiber))
-    $('.accordion-body-nutrients').append($('<li>').text(protein))
-    // console.log(nu)
+    $('.accordion-body-nutrients').append($('<ul>').addClass('ingredientName').text(ingredientName))
+    $('.ingredientName').append($('<li>').text(`Cholesterol: ${nu.CHOCDF}`))
+    // $('.accordion-body-nutrients').append($('<li>').text(cholesterol))
+    // $('.accordion-body-nutrients').append($('<li>').text(cholesterol))
+    // $('.accordion-body-nutrients').append($('<li>').text(calories))
+    // $('.accordion-body-nutrients').append($('<li>').text(fat))
+    // $('.accordion-body-nutrients').append($('<li>').text(fiber))
+    // $('.accordion-body-nutrients').append($('<li>').text(protein))
+    // // console.log(nu)
   })
 	.catch(err => console.error(err));}
 
