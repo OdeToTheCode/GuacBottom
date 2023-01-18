@@ -51,7 +51,6 @@ recipeButtonFun()
      // console.log(index)
      let name = recipeDataArray[index].name
      let recipeKey = index
-     console.log(key)
      let newButton = $('<button type="button" class="btn btn-primary recipe" data-bs-toggle="modal" data-bs-target="#exampleModal">').text(name).val(recipeKey)
   
      $('#buttonContainer').append(newButton)
