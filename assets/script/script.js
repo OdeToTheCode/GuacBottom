@@ -49,25 +49,41 @@ $(function(){
   //   console.log(key)
   //   $('#buttonContainer').append(newButton)
   // }
+  // function recipeButtonFun(){
+  //  for (let index = 0; index < recipeDataArray.length; index++) {
+  //   // console.log(index)
+  //   let Key = recipeDataArray[index].name
+  //   recipeKey = recipeDataArray[index]
+  //   // console.log(key)
+  //   let newButton = $('<button>').text(Key).addClass('btn', 'btn-primary', 'recipe').attr('id', recipe[index])
+  //   console.log(newButton[0].textContent)
+  //   $('#buttonContainer').append(newButton)
+  //  } 
+  // }
+
   function recipeButtonFun(){
-   for (let index = 0; index < recipeDataArray.length; index++) {
-    // console.log(index)
-    let Key = recipeDataArray[index].name
-    recipeKey = recipeDataArray[index]
-    // console.log(key)
-    let newButton = $('<button>').text(Key).addClass('btn', 'btn-primary', 'recipe').attr('id', recipe[index])
-    console.log(newButton[0].textContent)
-    $('#buttonContainer').append(newButton)
-   } 
-  }
+    for (let index = 0; index < recipeDataArray.length; index++) {
+     // console.log(index)
+     let name = recipeDataArray[index].name
+     let recipeKey = index
+     // console.log(key)
+     let newButton = $('<button type="button" class="btn btn-primary recipe" data-bs-toggle="modal" data-bs-target="#exampleModal">').text(name).val(recipeKey)
+  
+     $('#buttonContainer').append(newButton)
+    } 
+   }
+  
+   $("#buttonContainer").on('click', function(e){
+    console.log($(e.target).val())
+    let btnIndex = $(e.target).val()
+    renderContent(recipeDataArray[btnIndex])
+   })
 
+  // $("#buttonContainer").on('click', function(e){
+  //   console.log()
 
-
-  $("#buttonContainer").on('click', function(e){
-    console.log()
-
-    renderContent(recipeDataArray[0])
-  })
+  //   renderContent(recipeDataArray[0])
+  // })
 
 
   function renderContent (recipe){
