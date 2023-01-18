@@ -33,8 +33,12 @@ recipeButtonFun()
           instructions:data[0].instructions[0].steps,
           yield:data[0].yield
         }
-        // console.log(recipeObject)
-        recipeDataArray.push(recipeObject)
+        for(var i = 0; i < recipeDataArray.length; i++) {
+          if(recipeDataArray[i].key == recipeObject.key) {
+              recipeDataArray.splice(i, 1);
+                break;}
+                 else{recipeDataArray.push(recipeObject)}
+              }
         let stringed = JSON.stringify(recipeDataArray)
         localStorage.setItem("recipeDataArray", stringed)
         recipeButtonFun(recipeObject)
@@ -47,7 +51,7 @@ recipeButtonFun()
      // console.log(index)
      let name = recipeDataArray[index].name
      let recipeKey = index
-     // console.log(key)
+     console.log(key)
      let newButton = $('<button type="button" class="btn btn-primary recipe" data-bs-toggle="modal" data-bs-target="#exampleModal">').text(name).val(recipeKey)
   
      $('#buttonContainer').append(newButton)
@@ -71,12 +75,16 @@ recipeButtonFun()
     // console.log(recipeDataArray)
     $('.modal-title').text(recipe.name)
 
-      recipe.ingredients.forEach(recipeItem =>{
+      recipe.ingredients.forEach((recipeItem,index ) =>{
         $('.accordion-body-ingredients')
           .append($('<li>')
             .text(recipeItem))
             console.log(recipeItem)
-            getNutrients(recipeItem)
+            var obj = {
+              id: index,
+              _name: recipeItem 
+            }
+            getNutrients(obj)
 
       })
       recipe.instructions.forEach(step=>{
@@ -89,8 +97,7 @@ recipeButtonFun()
   
   
 
-//if we give each button a increasing data-set equal to the index position of that item in the array we can use 
-//recipeArrayData[$('this').dataset]
+
 
 
 // ================================get nutrients=======================================
@@ -105,29 +112,24 @@ const nu_options = {
 
 
 function getNutrients(ingredient){
-  let keyword = ingredient
+  let keyword = ingredient._name
   let nutrientsFetch = `https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=${keyword}`
   fetch(nutrientsFetch, nu_options)
 	.then(response => response.json())
 	.then(response => {
     // console.log(response.parsed[0].food.nutrients)
     let nu = response.parsed[0].food.nutrients
-    console.log(response.text)
     let ingredientName = response.text
     let cholesterol = nu.CHOCDF
     let calories = nu.ENERC_KCAL
     let fat = nu.FAT
     let fiber = nu.FIBTG
     let protein = nu.PROCNT
-    $('.accordion-body-nutrients').append($('<ul>').addClass('ingredientName').text(ingredientName))
-    $('.ingredientName').append($('<li>').text(`Cholesterol: ${nu.CHOCDF}`))
-    // $('.accordion-body-nutrients').append($('<li>').text(cholesterol))
-    // $('.accordion-body-nutrients').append($('<li>').text(cholesterol))
-    // $('.accordion-body-nutrients').append($('<li>').text(calories))
-    // $('.accordion-body-nutrients').append($('<li>').text(fat))
-    // $('.accordion-body-nutrients').append($('<li>').text(fiber))
-    // $('.accordion-body-nutrients').append($('<li>').text(protein))
-    // // console.log(nu)
+    $('.accordion-body-nutrients').append($('<ul>').text(ingredientName).addClass('listDaddy').attr('id',`${ingredient.id}`))
+
+
+    $(`#${ingredient.id}`).append($('<li>').text(`Cholesterol: ${cholesterol}`)).append($('<li>').text(`Calories: ${calories}`)).append($('<li>').text(`Fat: ${fat}`)).append($('<li>').text(`Fiber: ${fiber}`)).append($('<li>').text(`Protein: ${protein}`))
+ 
   })
 	.catch(err => console.error(err));}
 
