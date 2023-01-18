@@ -4,7 +4,6 @@ $(function(){
   let recipeDataArray = JSON.parse(localStorage.getItem("recipeDataArray")) || []
   let importedRecipe = 'https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi'
   let recipeUrl = '';
-  let recipeKey = '';
 
   const options = { //recipe import
     method: 'POST',
@@ -24,34 +23,28 @@ recipeButtonFun()
     fetch(importedRecipe, options)
       .then(response =>{return response.json();})
       .then(function(data){
-     
-        console.log(recipeUrl)
         const recipeObject = {
           name:data[0].name,
-          // image:data[0].image[0],
           ingredients:data[0].ingredients,
           instructions:data[0].instructions[0].steps,
           yield:data[0].yield
         }
-        for(var i = 0; i < recipeDataArray.length; i++) {
-          if(recipeDataArray[i].key == recipeObject.key) {
-              recipeDataArray.splice(i, 1);
-                break;}
-                 else{recipeDataArray.push(recipeObject)}
-              }
-        let stringed = JSON.stringify(recipeDataArray)
-        localStorage.setItem("recipeDataArray", stringed)
-        recipeButtonFun(recipeObject)
+          recipeDataArray.push(recipeObject)
+          let stringed = JSON.stringify(recipeDataArray)
+          localStorage.setItem("recipeDataArray", stringed)
+          recipeButtonFun(recipeObject)
+        
+              
+        
       })
   }
 
 
   function recipeButtonFun(){
+    $('#buttonContainer').empty()
     for (let index = 0; index < recipeDataArray.length; index++) {
-     // console.log(index)
      let name = recipeDataArray[index].name
      let recipeKey = index
-     console.log(key)
      let newButton = $('<button type="button" class="btn btn-primary recipe" data-bs-toggle="modal" data-bs-target="#exampleModal">').text(name).val(recipeKey)
   
      $('#buttonContainer').append(newButton)
@@ -149,13 +142,3 @@ function getNutrients(ingredient){
 
 
 
-  /*Goals for 1/12/23:
-  - recipe and put it in array
-  - set to local stroge
-  - get from local storage
-  - take recipe array put into html dom elements
-  - get to display on page
-  */
-/* Goals revisited:
-- decide if the nutrients should be fetched when the recipe is imported
-*/
