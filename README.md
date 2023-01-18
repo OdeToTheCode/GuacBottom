@@ -2,8 +2,14 @@
 
 ## Group Project Goal:
 
-The Goal of this project is to work with a group of other developers to create a website which will utilize a different websites API to pull data from, then populates that data into our projects website. This website will run in the browser and will dynamically update the HTML and CSS throught JavaScript. 
+The Goal of this project is to work with a group of other developers to create a website which will utilize a different websites API to pull data from, then populates that data into our projects website. The website will also use another new technology, have at least 2 HTML pages with semantically correct HTML, use Bootstrap along with custom CSS and be responsive at a mobile and desktop breakpoint.   This website will run in the browser and will dynamically update the HTML and CSS throught JavaScript. 
 
+## Team Members:
+
+* **Maxwell Walters**
+* **Erik Neafus**
+* **Jacob Figueroa**
+* **Christopher Clark**
 
 ### Here is a link to the final version of our group project website.
 
