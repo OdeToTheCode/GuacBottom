@@ -16,9 +16,9 @@ $(function(){
   };
 
 recipeButtonFun()
+console.log(recipeDataArray)
 
 
-// getApi()
   function getApi() {
     fetch(importedRecipe, options)
       .then(response =>{return response.json();})
@@ -29,6 +29,11 @@ recipeButtonFun()
           instructions:data[0].instructions[0].steps,
           yield:data[0].yield
         }
+        for(var i = 0; i < recipeDataArray.length; i++) {
+          if(recipeDataArray[i].name == recipeObject.name) {
+              recipeDataArray.splice(i, 1);
+                break;}
+              }
           recipeDataArray.push(recipeObject)
           let stringed = JSON.stringify(recipeDataArray)
           localStorage.setItem("recipeDataArray", stringed)
