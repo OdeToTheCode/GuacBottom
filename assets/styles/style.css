@@ -199,6 +199,10 @@ header img{
   padding: 0.25rem
 }
 
+.mediaSize{
+  display: none;
+}
+
 .rText{
   font-size: 1.25rem;
   margin-bottom: 1.5rem;
@@ -217,8 +221,7 @@ header img{
 }
 
 .links{
-  color:var(--black);
-  text-decoration: none;
+  color: green;
   font-size: 22px;
 }
 .links:hover{
@@ -236,4 +239,112 @@ header img{
   width: 70%;
   height: auto;
   margin: 0.5rem;
+}
+
+
+
+
+
+
+/* Media Query */
+
+@media screen and (max-width: 480px){
+  .nameDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    margin-left: 1.5rem;
+  }
+
+  .name, .nameSubtext{
+    font-size: 1.5rem;
+  }
+
+  .subtextImageContainer{
+    display: flex;
+    align-items: center;
+  }
+
+  .subtext{
+    display: none;
+  }
+
+  header img{
+    width: 70px;
+    padding: 0.25rem;
+  }
+
+  /* Nav Section */
+
+  .mainContainer{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navContainer{
+    width: auto;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Main Section */
+
+  .mainTextContainer{
+    width: auto;
+    padding: 0.5rem;
+    border-radius: 15px;
+    margin: 0 0.5rem;
+  }
+
+  .missionStatementContainer{
+    width: 100%;
+  }
+
+  .missionStatementContainer h2{
+    background-image: var(--gradient);
+    color: var(--white);
+    text-align: center;
+    border-radius: 8px;
+  }
+
+  /* Recipe */
+
+  .urlImport{
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem;
+  }
+
+  #url-import{
+    width: 71%;
+  }
+
+  #url-import-button{
+    margin-left: 0.5rem;
+  }
+
+  .btn{
+    margin: 0.25rem 0.5rem;
+  }
+
+  /* Resources */
+
+  .mediaSize{
+    display: inline;
+  }
+
+  .image{
+    width: 98%;
+  }
+
+  .normalSize{
+    display: none;
+  }
+
+  .links{
+    margin-bottom: 1rem;
+    color: green;
+    padding: 0 0.5rem;
+    text-decoration: underline;
+  }
 }
