@@ -19,4 +19,4 @@ The Goal of this project is to work with a group of other developers to create a
 
 [Click here to see the GuacBottom Recipe Emporium website.](https://odetothecode.github.io/GuacBottom/)
 
-![Here is a screen shot of the GuacBottom Recipe Emporium website.](./assets/images/sample-screenshot.png)
+![Here is a screen shot of the GuacBottom Recipe Emporium website.](./assets/images/homepage-screenshot.png)
