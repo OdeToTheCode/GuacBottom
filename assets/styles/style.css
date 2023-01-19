@@ -118,10 +118,6 @@ header img{
   color:var(--black);
 }
 
-/* .contentContainer{
-  
-} */
-
 
 /* Recipe Page */
 
@@ -194,7 +190,50 @@ header img{
 
 /* Resources Page */
 
+.rHeader{
+  background-image: var(--gradient);
+  color: var(--white);
+  text-align: center;
+  width: 100%;
+  border-radius: 8px;
+  padding: 0.25rem
+}
+
+.rText{
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.recipeRow{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.recipeCol{
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+}
+
+.links{
+  color:var(--black);
+  text-decoration: none;
+  font-size: 22px;
+}
+.links:hover{
+  color: var(--modalbg);
+}
+
+
+.imageContainer{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .image{
-  width: 50%;
+  width: 70%;
   height: auto;
+  margin: 0.5rem;
 }
